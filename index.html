@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver - Indian Theme</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Optional: Google Fonts for Indian touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+    <style>
+    /* A little extra for side panels */
+    .container-flex {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 32px;
+        max-width: 1200px;
+        margin: 0 auto 30px auto;
+        padding: 0 12px;
+    }
+    .side-panel {
+        background: #fffbe7;
+        border-radius: 16px;
+        box-shadow: 0 2px 14px rgba(255, 153, 51, 0.06);
+        border: 2px solid #ffd700;
+        width: 260px;
+        min-width: 180px;
+        padding: 24px 20px 18px 20px;
+        font-family: 'Baloo 2', 'Noto Serif', serif;
+        color: #b22222;
+        font-size: 1.07rem;
+        line-height: 1.6;
+        position: relative;
+    }
+    .side-panel.left::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 40px;
+        background: url('https://cdn.pixabay.com/photo/2013/07/12/13/58/diya-147060_1280.png') no-repeat center/contain;
+        margin-bottom: 10px;
+        opacity: 0.7;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .side-panel.right::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 36px;
+        background: url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Peacock_Feather_%28Indian_Motif%29.png') no-repeat center/contain;
+        margin-bottom: 10px;
+        opacity: 0.7;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .side-panel h2 {
+        font-size: 1.2rem;
+        color: #138808;
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-family: 'Noto Serif', serif;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .side-panel ul {
+        padding-left: 18px;
+        margin-bottom: 0;
+    }
+    @media (max-width: 1000px) {
+        .container-flex {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .side-panel {
+            width: 100%;
+            min-width: 0;
+            margin-bottom: 18px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="Header">
+        <div id="logo">
+            <img src="./logo.png" alt="Sudoku Solver Logo">
+        </div>
+        <div id="name">Solve If You Can</div>
+    </header>
+
+    <main>
+        <h1 class="Heading">Sudoku Solver</h1>
+        <div class="container-flex">
+            <!-- Left Panel: Rules & How to Play -->
+            <aside class="side-panel left" aria-label="How to Play and Rules">
+                <h2>How to Play</h2>
+                <ul>
+                    <li>Fill the grid so that every row, column, and 3×3 box contains the digits 1 to 9.</li>
+                    <li>Each number can appear only once in each row, column, and box.</li>
+                    <li>Start with the easiest squares — those with the most numbers already filled in.</li>
+                </ul>
+                <h2 style="margin-top:18px;">Rules of Sudoku</h2>
+                <ul>
+                    <li>Use only numbers 1–9.</li>
+                    <li>No repeats in any row, column, or 3×3 box.</li>
+                    <li>Use logic, not guessing!</li>
+                </ul>
+                <div style="margin-top:18px; text-align:center; color:#ff9933; font-size:1.1rem; font-family:'Baloo 2',cursive;">
+                    <em>“सत्यमेव जयते”<br>
+                    (Truth Alone Triumphs)</em>
+                </div>
+            </aside>
+
+            <!-- Center: Sudoku Board and Buttons -->
+            <section style="display:flex; flex-direction:column; align-items:center;">
+                <section class="sudoku_grid" aria-label="Sudoku Board">
+                    <!-- 9x9 Sudoku cells, IDs 0-80, classes for color and border -->
+                    <!-- You can generate these cells dynamically in JS, but here they are for static HTML -->
+                    <div id="0" class="box1 bl bt"></div>
+                    <div id="1" class="box1 bt"></div>
+                    <div id="2" class="box1 br bt"></div>
+                    <div id="3" class="box2 bt"></div>
+                    <div id="4" class="box2 bt"></div>
+                    <div id="5" class="box2 br bt"></div>
+                    <div id="6" class="box3 bt"></div>
+                    <div id="7" class="box3 bt"></div>
+                    <div id="8" class="box3 br bt"></div>
+                    <div id="9" class="box1 bl"></div>
+                    <div id="10" class="box1"></div>
+                    <div id="11" class="box1 br"></div>
+                    <div id="12" class="box2"></div>
+                    <div id="13" class="box2"></div>
+                    <div id="14" class="box2 br"></div>
+                    <div id="15" class="box3"></div>
+                    <div id="16" class="box3"></div>
+                    <div id="17" class="box3 br"></div>
+                    <div id="18" class="box1 bb bl"></div>
+                    <div id="19" class="box1 bb"></div>
+                    <div id="20" class="box1 br bb"></div>
+                    <div id="21" class="box2 bb"></div>
+                    <div id="22" class="box2 bb"></div>
+                    <div id="23" class="box2 br bb"></div>
+                    <div id="24" class="box3 bb"></div>
+                    <div id="25" class="box3 bb"></div>
+                    <div id="26" class="box3 bb br"></div>
+                    <div id="27" class="box1 bl"></div>
+                    <div id="28" class="box1"></div>
+                    <div id="29" class="box1 br"></div>
+                    <div id="30" class="box2"></div>
+                    <div id="31" class="box2"></div>
+                    <div id="32" class="box2 br"></div>
+                    <div id="33" class="box3"></div>
+                    <div id="34" class="box3"></div>
+                    <div id="35" class="box3 br"></div>
+                    <div id="36" class="box1 bl"></div>
+                    <div id="37" class="box1"></div>
+                    <div id="38" class="box1 br"></div>
+                    <div id="39" class="box2"></div>
+                    <div id="40" class="box2"></div>
+                    <div id="41" class="box2 br"></div>
+                    <div id="42" class="box3"></div>
+                    <div id="43" class="box3"></div>
+                    <div id="44" class="box3 br"></div>
+                    <div id="45" class="box1 bb bl"></div>
+                    <div id="46" class="box1 bb"></div>
+                    <div id="47" class="box1 br bb"></div>
+                    <div id="48" class="box2 bb"></div>
+                    <div id="49" class="box2 bb"></div>
+                    <div id="50" class="box2 br bb"></div>
+                    <div id="51" class="box3 bb"></div>
+                    <div id="52" class="box3 bb"></div>
+                    <div id="53" class="box3 bb br"></div>
+                    <div id="54" class="box1 bl"></div>
+                    <div id="55" class="box1"></div>
+                    <div id="56" class="box1 br"></div>
+                    <div id="57" class="box2"></div>
+                    <div id="58" class="box2"></div>
+                    <div id="59" class="box2 br"></div>
+                    <div id="60" class="box3"></div>
+                    <div id="61" class="box3"></div>
+                    <div id="62" class="box3 br"></div>
+                    <div id="63" class="box1 bl"></div>
+                    <div id="64" class="box1"></div>
+                    <div id="65" class="box1 br"></div>
+                    <div id="66" class="box2"></div>
+                    <div id="67" class="box2"></div>
+                    <div id="68" class="box2 br"></div>
+                    <div id="69" class="box3"></div>
+                    <div id="70" class="box3"></div>
+                    <div id="71" class="box3 br"></div>
+                    <div id="72" class="box1 bb bl"></div>
+                    <div id="73" class="box1 bb"></div>
+                    <div id="74" class="box1 br bb"></div>
+                    <div id="75" class="box2 bb"></div>
+                    <div id="76" class="box2 bb"></div>
+                    <div id="77" class="box2 br bb"></div>
+                    <div id="78" class="box3 bb"></div>
+                    <div id="79" class="box3 bb"></div>
+                    <div id="80" class="box3 bb br"></div>
+                </section>
+                <section class="Buttons">
+                    <button id="GetPuzzle" aria-label="Get a new Sudoku puzzle">Get Puzzle</button>
+                    <button id="SolvePuzzle" aria-label="Solve the current Sudoku puzzle">Solve Puzzle</button>
+                </section>
+            </section>
+
+            <!-- Right Panel: Hints & Strategies -->
+            <aside class="side-panel right" aria-label="Hints and Strategies">
+                <h2>Hints &amp; Strategy</h2>
+                <ul>
+                    <li><strong>Scan:</strong> Look for rows, columns, or boxes where a number is missing only once.</li>
+                    <li><strong>Pencil In:</strong> Make small notes of possible numbers in empty cells.</li>
+                    <li><strong>Elimination:</strong> Use process of elimination to narrow down choices.</li>
+                    <li><strong>Stay Calm:</strong> Patience and logic are your best friends.</li>
+                </ul>
+                <div style="margin-top:18px; text-align:center; color:#138808; font-size:1.1rem; font-family:'Baloo 2',cursive;">
+                    <em>“धैर्यं सर्वत्र साधनम्”<br>
+                    (Patience accomplishes everything)</em>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script src="./Script.js"></script>
+</body>
+</html>
