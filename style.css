@@ -1,0 +1,211 @@
+body {
+    background: linear-gradient(135deg, #fffbe7 0%, #fbeee6 100%);
+    font-family: 'Noto Serif', 'Merriweather', 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Header with a subtle mandala pattern */
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 20px 40px;
+    background: url('https://www.transparenttextures.com/patterns/indian-motif.png'), linear-gradient(90deg, #ff9933 0%, #fffbe7 100%);
+    box-shadow: 0 2px 8px rgba(128, 64, 0, 0.08);
+    border-radius: 0 0 24px 24px;
+    border-bottom: 4px solid #138808;
+}
+
+#logo {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #ff9933;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255, 153, 51, 0.10);
+}
+
+#name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #b22222;
+    margin-left: 30px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 #fff8e1, 2px 2px 0 #ffd700;
+}
+
+/* Heading with peacock feather accent */
+.Heading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #138808;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    position: relative;
+}
+.Heading::after {
+    content: '';
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-left: 12px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Peacock_Feather_%28Indian_Motif%29.png') no-repeat center/contain;
+    vertical-align: middle;
+    opacity: 0.8;
+}
+
+.sudoku_grid {
+    display: grid;
+    grid-template-columns: repeat(9, 48px);
+    grid-template-rows: repeat(9, 48px);
+    gap: 0;
+    margin: 30px auto 30px auto;
+    background: #fff8e1;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(178, 34, 34, 0.10);
+    padding: 12px;
+    width: fit-content;
+    border: 2px solid #ffd700;
+    outline: 6px double #ff9933;
+}
+
+/* Traditional color palette for boxes */
+.sudoku_grid .box1 {
+    background: linear-gradient(135deg, #ff9933 60%, #fffbe7 100%);
+    color: #b22222;
+    border: 1px solid #ffd700;
+}
+.sudoku_grid .box1:hover {
+    background: #ffd700;
+    color: #b22222;
+}
+
+.sudoku_grid .box2 {
+    background: linear-gradient(135deg, #138808 60%, #e6ffe6 100%);
+    color: #fff;
+    border: 1px solid #ff9933;
+}
+.sudoku_grid .box2:hover {
+    background: #43cea2;
+    color: #fff;
+}
+
+.sudoku_grid .box3 {
+    background: linear-gradient(135deg, #1a237e 60%, #e3e3ff 100%);
+    color: #ffd700;
+    border: 1px solid #b22222;
+}
+.sudoku_grid .box3:hover {
+    background: #b22222;
+    color: #ffd700;
+}
+
+.sudoku_grid div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-sizing: border-box;
+    border-radius: 7px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    box-shadow: 0 1px 4px rgba(255, 153, 51, 0.06);
+}
+
+.sudoku_grid div:empty {
+    background: #fffbe7;
+}
+
+.bl { border-left: 3px solid #b22222; }
+.bb { border-bottom: 3px solid #b22222; }
+.br { border-right: 3px solid #b22222; }
+.bt { border-top: 3px solid #b22222; }
+
+/* Buttons: keep the modern look but add Indian colors */
+.Buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 18px;
+    margin-bottom: 60px;
+}
+
+#GetPuzzle, #SolvePuzzle {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    background: linear-gradient(90deg, #ff9933 0%, #138808 100%);
+    padding: 14px 38px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(178, 34, 34, 0.08);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    outline: none;
+    letter-spacing: 1px;
+}
+
+#GetPuzzle:hover, #SolvePuzzle:hover {
+    background: linear-gradient(90deg, #ffd700 0%, #b22222 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 18px rgba(178, 34, 34, 0.14);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .Header, .Heading {
+        font-size: 1.2rem;
+        flex-direction: column;
+        padding: 10px 6px;
+    }
+    #name {
+        font-size: 1.1rem;
+        margin-left: 0;
+    }
+    .sudoku_grid {
+        grid-template-columns: repeat(9, 28px);
+        grid-template-rows: repeat(9, 28px);
+        padding: 4px;
+    }
+    .sudoku_grid div {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+    }
+    #logo {
+        width: 48px;
+        height: 48px;
+    }
+    .Buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #GetPuzzle, #SolvePuzzle {
+        padding: 9px 18px;
+        font-size: 1rem;
+    }
+}
